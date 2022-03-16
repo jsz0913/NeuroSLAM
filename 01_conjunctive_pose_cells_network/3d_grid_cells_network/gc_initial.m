@@ -1,54 +1,23 @@
 function gc_initial(varargin)
-%     NeuroSLAM System Copyright (C) 2018-2019 
-%     NeuroSLAM: A Brain inspired SLAM System for 3D Environments
-%
-%     Fangwen Yu (www.yufangwen.com), Jianga Shang, Youjian Hu, Michael Milford(www.michaelmilford.com) 
-%
-%     The NeuroSLAM V1.0 (MATLAB) was developed based on the OpenRatSLAM (David et al. 2013). 
-%     The RatSLAM V0.3 (MATLAB) developed by David Ball, Michael Milford and Gordon Wyeth in 2008.
-% 
-%     Reference:
-%     Ball, David, Scott Heath, Janet Wiles, Gordon Wyeth, Peter Corke, and Michael Milford.
-%     "OpenRatSLAM: an open source brain-based SLAM system." Autonomous Robots 34, no. 3 (2013): 149-176.
-% 
-%     This program is free software: you can redistribute it and/or modify
-%     it under the terms of the GNU General Public License as published by
-%     the Free Software Foundation, either version 3 of the License, or
-%     (at your option) any later version.
-% 
-%     This program is distributed in the hope that it will be useful,
-%     but WITHOUT ANY WARRANTY; without even the implied warranty of
-%     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-%     GNU General Public License for more details.
-% 
-%     You should have received a copy of the GNU General Public License
-%     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     %% define some variables of 3d gc
     % The 3D Grid Cells Network
     global GRIDCELLS;
     
-    % The x, y, z dimension of 3D Grid Cells Model (3D CAN) 
+    % 3D吸引子网络 x y z
     global GC_X_DIM;
     global GC_Y_DIM;
     global GC_Z_DIM;
     
-    % The dimension of local excitation weight matrix for x, y, z
+    % 局部激活权重矩阵维度
     global GC_EXCIT_X_DIM;
     global GC_EXCIT_Y_DIM;
     global GC_EXCIT_Z_DIM;
     
-    % The dimension of local excitation weight matrix for x, y, z
+    % 全局抑制权重矩阵维度
     global GC_INHIB_X_DIM;
     global GC_INHIB_Y_DIM;
     global GC_INHIB_Z_DIM;
-    
-    % The global inhibition value
-    global GC_GLOBAL_INHIB;   
-    
-    % The amount of energy injected when a view template is re-seen
-    global GC_VT_INJECT_ENERGY;
-
     
     % Variance of Excitation and Inhibition in XY and THETA respectively
     global GC_EXCIT_X_VAR;
@@ -58,8 +27,14 @@ function gc_initial(varargin)
     global GC_INHIB_X_VAR;
     global GC_INHIB_Y_VAR;
     global GC_INHIB_Z_VAR;
+    
+    % 全局抑制值
+    global GC_GLOBAL_INHIB;   
+    
+    % The amount of energy injected when a view template is re-seen
+    global GC_VT_INJECT_ENERGY;
 
-      
+   
     % The scale of horizontal translational velocity
     global GC_HORI_TRANS_V_SCALE;
     
@@ -69,6 +44,7 @@ function gc_initial(varargin)
     % packet size for wrap, the left and right activity cells near
     % center of best activity packet, eg. = 5
     global GC_PACKET_SIZE;
+
 
     % Process the parameters
     for i=1:(nargin-1)
@@ -106,6 +82,8 @@ function gc_initial(varargin)
              end
         end
     end
+    
+    
    
     % The weight of excitation in 3D grid cell network
     global GC_EXCIT_WEIGHT;
